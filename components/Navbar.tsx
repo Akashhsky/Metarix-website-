@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
     { name: 'Voice Solutions', href: '#voice' },
     { name: 'AI Consulting', href: '#consulting' },
     { name: 'Pricing', href: '#pricing' },
+    { name: 'FAQ', href: '#faq' },
   ];
 
   useEffect(() => {

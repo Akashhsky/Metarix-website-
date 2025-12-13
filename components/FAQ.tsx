@@ -96,7 +96,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="faq" className="py-24 bg-brand-dark relative overflow-hidden">
         {/* Background Gradients */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-coral/5 rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 translate-y-1/2"></div>

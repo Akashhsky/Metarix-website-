@@ -5,9 +5,10 @@ const Comparison: React.FC = () => {
   const comparisonData = [
     { label: "Availability", trad: "9-5 or Shift based", other: "24/7 Always On", meta: "24/7 Always On" },
     { label: "Response Latency", trad: "Instant", other: "High (~1000ms)", meta: "Ultra-low (~300ms)" },
-    { label: "Cost Per Minute", trad: "₹10.00", other: "₹8.00+", meta: "₹5.90" },
+    { label: "Cost Per Minute", trad: "₹10.00", other: "₹8.00+", meta: "₹5.75" },
     { label: "Scalability", trad: "Slow (Hiring)", other: "Instant", meta: "Instant" },
-    { label: "Conversation Quality", trad: "Inconsistent", other: "Robotic / Stiff", meta: "Human-like & Fluid" }
+    { label: "Conversation Quality", trad: "Inconsistent", other: "Robotic / Stiff", meta: "Human-like & Fluid" },
+    { label: "Analytics & Insights", trad: "Manual / Delayed Reporting", other: "Basic Call Logs", meta: "Live Dashboard & Sentiment" }
   ];
 
   return (

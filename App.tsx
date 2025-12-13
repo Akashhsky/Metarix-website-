@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Partners from './components/Partners';
 import VoiceFeature from './components/VoiceFeature';
+import Industries from './components/Industries';
 import Consulting from './components/Consulting';
 import Comparison from './components/Comparison';
 import FAQ from './components/FAQ';
@@ -16,6 +17,7 @@ function App() {
       <Hero />
       <Partners />
       <VoiceFeature />
+      <Industries />
       <Consulting />
       <Comparison />
       <FAQ />
