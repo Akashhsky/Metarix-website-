@@ -105,7 +105,7 @@ const Hero: React.FC = () => {
               onClick={(e) => handleSmoothScroll(e, '#consulting')}
               className="flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-brand-coral/50 transition-all backdrop-blur-sm active:scale-95 w-full sm:w-auto"
             >
-              Get Consultation
+              Build Your AI Strategy
               <ArrowRight size={18} />
             </a>
           </div>

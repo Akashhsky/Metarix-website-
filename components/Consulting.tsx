@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import WorkflowVisual from './WorkflowVisual';
 
@@ -34,7 +34,7 @@ const Consulting: React.FC = () => {
               We don't just provide tools; we architect your future. Our expert consultants analyze your business workflows to inject AI exactly where it drives the most value.
             </p>
             
-            <ul className="space-y-4 w-full">
+            <ul className="space-y-4 w-full mb-10">
               {points.map((point, index) => (
                 <li key={index} className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
                   <CheckCircle size={20} className="text-brand-coral flex-shrink-0" />
@@ -43,9 +43,13 @@ const Consulting: React.FC = () => {
               ))}
             </ul>
 
-            <button className="mt-8 px-6 py-3 border border-white/20 rounded-lg text-white hover:bg-white hover:text-brand-dark transition-all">
-                Explore Consulting
-            </button>
+            <a 
+              href="mailto:consulting@metarix.ai"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-dark rounded-full font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,127,80,0.4)]"
+            >
+                <span>Schedule Your Strategy Call</span>
+                <ArrowRight className="group-hover:translate-x-1 transition-transform text-brand-coral" size={20} />
+            </a>
           </motion.div>
 
           {/* Visual Side */}
