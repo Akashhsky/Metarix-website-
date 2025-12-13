@@ -62,6 +62,12 @@ const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`fixed w-full z-40 transition-all duration-300 ${
@@ -69,7 +75,11 @@ const Navbar: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold tracking-wide text-white z-50 relative" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <a 
+          href="#" 
+          className="text-2xl font-bold tracking-wide text-white z-50 relative" 
+          onClick={handleLogoClick}
+        >
           METARIX
         </a>
 
