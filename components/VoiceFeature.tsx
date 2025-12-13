@@ -46,7 +46,7 @@ const VoiceFeature: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group p-8 rounded-2xl bg-brand-card border border-white/5 hover:border-brand-coral/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-2"
+              className="group p-8 rounded-2xl bg-brand-card border border-white/5 hover:border-brand-coral/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-2 flex flex-col items-center md:items-start text-center md:text-left"
             >
               <div className="mb-6 text-brand-coral p-3 bg-brand-coral/10 rounded-lg inline-block group-hover:scale-110 transition-transform">
                 {feature.icon}

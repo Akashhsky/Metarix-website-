@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Cpu, Database, ArrowRight } from 'lucide-react';
+import { Phone, Cpu, Database } from 'lucide-react';
 
 const WorkflowVisual: React.FC = () => {
   return (
     <div className="py-12 bg-black/20 rounded-2xl border border-white/5 overflow-hidden">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 px-4">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 px-4">
         
         {/* Node 1 */}
         <div className="flex flex-col items-center gap-3">
@@ -16,12 +16,23 @@ const WorkflowVisual: React.FC = () => {
         </div>
 
         {/* Connector 1 */}
-        <div className="relative h-12 w-1 md:h-1 md:w-24 bg-gray-800 rounded-full overflow-hidden">
-             <motion.div 
-                className="absolute inset-0 bg-brand-coral"
-                animate={{ x: ['-100%', '100%'] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-             />
+        <div className="relative flex-none">
+             {/* Desktop Horizontal Line */}
+             <div className="hidden md:block h-1 w-24 bg-gray-800 rounded-full overflow-hidden relative">
+                 <motion.div 
+                    className="absolute inset-0 bg-brand-coral"
+                    animate={{ x: ['-100%', '100%'] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                 />
+             </div>
+             {/* Mobile Vertical Line */}
+             <div className="md:hidden w-1 h-12 bg-gray-800 rounded-full overflow-hidden relative">
+                 <motion.div 
+                    className="absolute inset-0 bg-brand-coral"
+                    animate={{ y: ['-100%', '100%'] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                 />
+             </div>
         </div>
 
         {/* Node 2 */}
@@ -34,12 +45,23 @@ const WorkflowVisual: React.FC = () => {
         </div>
 
         {/* Connector 2 */}
-        <div className="relative h-12 w-1 md:h-1 md:w-24 bg-gray-800 rounded-full overflow-hidden">
-             <motion.div 
-                className="absolute inset-0 bg-brand-coral"
-                animate={{ x: ['-100%', '100%'] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "linear", delay: 0.75 }}
-             />
+        <div className="relative flex-none">
+             {/* Desktop Horizontal Line */}
+             <div className="hidden md:block h-1 w-24 bg-gray-800 rounded-full overflow-hidden relative">
+                 <motion.div 
+                    className="absolute inset-0 bg-brand-coral"
+                    animate={{ x: ['-100%', '100%'] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "linear", delay: 0.75 }}
+                 />
+             </div>
+             {/* Mobile Vertical Line */}
+             <div className="md:hidden w-1 h-12 bg-gray-800 rounded-full overflow-hidden relative">
+                 <motion.div 
+                    className="absolute inset-0 bg-brand-coral"
+                    animate={{ y: ['-100%', '100%'] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "linear", delay: 0.75 }}
+                 />
+             </div>
         </div>
 
         {/* Node 3 */}

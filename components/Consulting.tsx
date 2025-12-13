@@ -21,6 +21,7 @@ const Consulting: React.FC = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="text-center lg:text-left flex flex-col items-center lg:items-start"
           >
             <div className="text-brand-coral font-semibold tracking-wider uppercase mb-2">
                 Consulting Services
@@ -29,14 +30,14 @@ const Consulting: React.FC = () => {
               Beyond Voice: <br />
               Complete AI Implementation.
             </h2>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed max-w-lg lg:max-w-none mx-auto lg:mx-0">
               We don't just provide tools; we architect your future. Our expert consultants analyze your business workflows to inject AI exactly where it drives the most value.
             </p>
             
-            <ul className="space-y-4">
+            <ul className="space-y-4 w-full">
               {points.map((point, index) => (
-                <li key={index} className="flex items-center gap-3 text-gray-300">
-                  <CheckCircle size={20} className="text-brand-coral" />
+                <li key={index} className="flex items-center justify-center lg:justify-start gap-3 text-gray-300">
+                  <CheckCircle size={20} className="text-brand-coral flex-shrink-0" />
                   <span>{point}</span>
                 </li>
               ))}

@@ -17,15 +17,11 @@ const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Logic to determine active section based on scroll position
       let current = '';
       for (const link of navLinks) {
         const section = document.querySelector(link.href);
         if (section) {
           const rect = section.getBoundingClientRect();
-          // Check if the section is currently active in the viewport
-          // If the top of the section is near the top of the viewport (taking navbar height into account)
-          // and the bottom is still visible.
           if (rect.top <= 150 && rect.bottom >= 150) {
             current = link.href;
           }
@@ -35,18 +31,27 @@ const Navbar: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on mount
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [mobileMenuOpen]);
 
   return (
     <nav
       className={`fixed w-full z-40 transition-all duration-300 ${
-        scrolled ? 'bg-brand-dark/90 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-6'
+        scrolled || mobileMenuOpen ? 'bg-brand-dark/90 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-6'
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold tracking-wide text-white">
+        <a href="#" className="text-2xl font-bold tracking-wide text-white z-50 relative">
           METARIX
         </a>
 
@@ -72,40 +77,57 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-white z-50 relative p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X /> : <Menu />}
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-brand-dark border-b border-white/10 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 top-0 z-40 bg-brand-dark/95 backdrop-blur-xl flex flex-col justify-center px-8 md:hidden"
           >
-            <div className="flex flex-col px-6 py-4 space-y-4">
-              {navLinks.map((link) => (
-                <a
+            <div className="flex flex-col space-y-8">
+              {navLinks.map((link, idx) => (
+                <motion.a
                   key={link.name}
                   href={link.href}
-                  className={`transition-colors ${
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`text-3xl font-bold tracking-tight ${
                     activeSection === link.href
-                      ? 'text-brand-coral font-bold'
-                      : 'text-gray-300 hover:text-brand-coral'
+                      ? 'text-brand-coral'
+                      : 'text-white/80'
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </motion.a>
               ))}
-              <button className="bg-brand-coral text-white px-6 py-3 rounded-md w-full font-medium">
-                Book a Demo
-              </button>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="pt-8"
+              >
+                <button 
+                  className="w-full bg-brand-coral text-white py-4 rounded-xl text-lg font-bold shadow-glow"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Book a Demo
+                </button>
+                <p className="text-center text-gray-500 mt-6 text-sm">
+                  Smart AI Solutions for the Future.
+                </p>
+              </motion.div>
             </div>
           </motion.div>
         )}
