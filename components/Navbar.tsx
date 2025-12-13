@@ -71,13 +71,15 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className={`fixed w-full z-40 transition-all duration-300 ${
-        scrolled || mobileMenuOpen ? 'bg-brand-dark/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'
+        scrolled || mobileMenuOpen ? 'bg-brand-dark/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      } ${
+        scrolled ? 'py-4' : 'py-6'
       }`}
     >
-      <div className="container mx-auto px-6 flex justify-between items-center">
+      <div className="container mx-auto px-6 flex justify-between items-center relative z-50">
         <a 
           href="#" 
-          className="text-2xl font-bold tracking-wide text-white z-50 relative" 
+          className="text-2xl font-bold tracking-wide text-white" 
           onClick={handleLogoClick}
         >
           METARIX
@@ -110,8 +112,9 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white z-50 relative p-2"
+          className="md:hidden text-white p-2 focus:outline-none"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -121,21 +124,21 @@ const Navbar: React.FC = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-0 z-40 bg-brand-dark/95 backdrop-blur-xl flex flex-col justify-center px-8 md:hidden"
+            className="fixed inset-0 z-40 bg-brand-dark/98 backdrop-blur-xl flex flex-col justify-center items-center md:hidden h-[100dvh]"
           >
-            <div className="flex flex-col space-y-8">
+            <div className="flex flex-col items-center space-y-8 w-full max-w-sm px-6">
               {navLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`text-3xl font-bold tracking-tight ${
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + idx * 0.1 }}
+                  className={`text-3xl font-bold tracking-tight text-center w-full ${
                     activeSection === link.href
                       ? 'text-brand-coral'
                       : 'text-white/80'
@@ -148,13 +151,13 @@ const Navbar: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="pt-8"
+                transition={{ delay: 0.4 }}
+                className="pt-8 w-full flex flex-col items-center"
               >
                 <a
                   href="#consulting"
                   onClick={(e) => handleSmoothScroll(e, '#consulting')}
-                  className="block w-full text-center bg-brand-coral text-white py-4 rounded-xl text-lg font-bold shadow-glow"
+                  className="block w-full text-center bg-brand-coral text-white py-4 rounded-xl text-lg font-bold shadow-glow active:scale-95 transition-transform"
                 >
                   Book a Demo
                 </a>
