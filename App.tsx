@@ -5,6 +5,7 @@ import Partners from './components/Partners';
 import VoiceFeature from './components/VoiceFeature';
 import Consulting from './components/Consulting';
 import Comparison from './components/Comparison';
+import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
 
@@ -17,6 +18,7 @@ function App() {
       <VoiceFeature />
       <Consulting />
       <Comparison />
+      <FAQ />
       <Footer />
       <ChatBot />
     </div>
