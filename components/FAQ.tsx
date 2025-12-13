@@ -53,28 +53,28 @@ const FAQ: React.FC = () => {
 
   const faqs = [
     {
-      q: "How human-sounding are the AI Voice Agents?",
-      a: "Our agents utilize advanced neural voice technology with sub-second latency. They can handle interruptions, pause naturally, and detect emotion, making them nearly indistinguishable from human callers."
+      q: "Do Metarix Alive agents sound like real humans?",
+      a: "Metarix Alive utilizes advanced neural voice technology with sub-second latency. It can handle interruptions, pause naturally, and detect emotion, making interactions nearly indistinguishable from human callers."
     },
     {
-      q: "Can I customize the voice and tone of the AI agent?",
-      a: "Yes. You can customize voices, tones, personalities, and even the logic behind the conversation flow using your preferred LLM prompts."
+      q: "Can I customize the voice and tone of Metarix Alive?",
+      a: "Yes. You can fully customize voices, tones, personalities, and even the logic behind the conversation flow using your preferred LLM prompts."
     },
     {
       q: "Do you offer AI solutions beyond voice calling?",
-      a: "Absolutely. While Voice is our specialty, we build chatbots, automate back-office workflows, and create custom AI strategies for business growth using AI."
+      a: "Absolutely. While Metarix Alive is our flagship voice product, we also build chatbots, automate back-office workflows, and create custom AI strategies for business growth."
     },
     {
-      q: "Can Metarix integrate AI into my existing CRM?",
-      a: "Yes. As part of our implementation services, we integrate our voice agents directly with your CRM to log calls, update leads, and trigger workflows automatically."
+      q: "Can I integrate Metarix Alive with my existing CRM?",
+      a: "Yes. As part of our implementation services, we integrate Metarix Alive directly with your CRM to log calls, update leads, and trigger workflows automatically."
     },
     {
       q: "Is my data secure?",
-      a: "We take data security seriously. Metarix uses encryption protocols and secure API practices to ensure your data is protected at all times."
+      a: "We take data security seriously. Metarix uses enterprise-grade encryption protocols and secure API practices to ensure your data is protected at all times."
     },
     {
       q: "How does the pricing work?",
-      a: "We offer flexible models. For Voice Agents, it's typically usage-based. For Consulting and Implementation, we provide project-based quotes tailored to your specific business needs."
+      a: "We offer flexible models. For Metarix Alive, it's typically usage-based (per minute). For Consulting and Implementation, we provide project-based quotes tailored to your specific business needs."
     }
   ];
 
@@ -119,7 +119,7 @@ const FAQ: React.FC = () => {
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-coral to-white">FAQ</span>
                 </h2>
                 <p className="text-gray-400 text-lg mb-8">
-                    Everything you need to know about implementing Metarix AI agents in your business.
+                    Everything you need to know about implementing Metarix Alive in your business.
                 </p>
                 <a 
                     href="#consulting" 

@@ -8,6 +8,7 @@ const Comparison: React.FC = () => {
     { label: "Cost Per Minute", trad: "₹10.00", other: "₹8.00+", meta: "₹5.75" },
     { label: "Scalability", trad: "Slow (Hiring)", other: "Instant", meta: "Instant" },
     { label: "Conversation Quality", trad: "Inconsistent", other: "Robotic / Stiff", meta: "Human-like & Fluid" },
+    { label: "Language Support", trad: "Limited / Hire Dependent", other: "Major Indian / Global Langs", meta: "22 Indian & Global Langs" },
     { label: "Analytics & Insights", trad: "Manual / Delayed Reporting", other: "Basic Call Logs", meta: "Live Dashboard & Sentiment" }
   ];
 

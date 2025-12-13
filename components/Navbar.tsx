@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className={`fixed w-full z-40 transition-all duration-300 ${
-        scrolled || mobileMenuOpen ? 'bg-brand-dark/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled || mobileMenuOpen ? 'bg-brand-dark shadow-lg' : 'bg-transparent'
       } ${
         scrolled ? 'py-4' : 'py-6'
       }`}
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white p-2 focus:outline-none"
+          className="md:hidden text-white p-2 focus:outline-none hover:text-brand-coral transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -129,9 +129,12 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-brand-dark/98 backdrop-blur-xl flex flex-col justify-center items-center md:hidden h-[100dvh]"
+            className="fixed inset-0 z-40 bg-[#1A1A1A] flex flex-col justify-center items-center md:hidden h-[100dvh]"
           >
-            <div className="flex flex-col items-center space-y-8 w-full max-w-sm px-6">
+            {/* Background Gradient Blob for visual interest */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-brand-coral/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+            <div className="flex flex-col items-center space-y-8 w-full max-w-sm px-6 relative z-10">
               {navLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
@@ -142,7 +145,7 @@ const Navbar: React.FC = () => {
                   className={`text-3xl font-bold tracking-tight text-center w-full ${
                     activeSection === link.href
                       ? 'text-brand-coral'
-                      : 'text-white/80'
+                      : 'text-white'
                   }`}
                   onClick={(e) => handleSmoothScroll(e, link.href)}
                 >
