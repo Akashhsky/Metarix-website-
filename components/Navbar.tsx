@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className={`fixed w-full z-40 transition-all duration-300 ${
-        scrolled || mobileMenuOpen ? 'bg-brand-dark/90 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-6'
+        scrolled || mobileMenuOpen ? 'bg-brand-dark/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
