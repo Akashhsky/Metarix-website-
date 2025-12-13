@@ -148,7 +148,7 @@ const Hero: React.FC = () => {
                   <div className="w-full h-full bg-[#000000] rounded-[38px] md:rounded-[45px] relative overflow-hidden flex flex-col">
                       
                       {/* Dynamic Island / Status Bar */}
-                      <div className="pt-4 px-6 md:px-8 flex justify-between items-center text-white/90 text-xs font-semibold z-20">
+                      <div className="pt-4 px-6 md:px-8 flex justify-between items-center text-white/90 text-xs font-semibold z-20 shrink-0">
                           <span>9:41</span>
                           <div className="w-20 md:w-24 h-6 md:h-7 bg-black rounded-full absolute left-1/2 -translate-x-1/2 top-3 z-30 flex items-center justify-end px-2">
                             <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse mr-1"></div>
@@ -161,13 +161,14 @@ const Hero: React.FC = () => {
                       </div>
 
                       {/* Main Call UI */}
-                      <div className="flex-1 flex flex-col items-center pt-8 md:pt-12 pb-8 px-6 relative">
+                      {/* Increased top padding (pt-12 -> pt-16 md:pt-20) to clear the Dynamic Island */}
+                      <div className="flex-1 flex flex-col items-center pt-16 md:pt-20 pb-8 px-6 relative">
                           
                           {/* Background Glow */}
                           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 bg-brand-coral/20 blur-[60px] md:blur-[80px] rounded-full"></div>
 
                           {/* Contact Info */}
-                          <div className="flex flex-col items-center gap-3 z-10">
+                          <div className="flex flex-col items-center gap-3 z-10 shrink-0">
                               <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center shadow-lg relative">
                                   <User size={32} className="text-gray-400 md:w-[40px] md:h-[40px]" />
                                   <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 bg-brand-coral rounded-full flex items-center justify-center border-4 border-black">
@@ -175,13 +176,13 @@ const Hero: React.FC = () => {
                                   </div>
                               </div>
                               <div className="text-center mt-2">
-                                  <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Metarix AI</h3>
+                                  <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Metarix Alive</h3>
                                   <p className="text-brand-coral text-xs md:text-sm font-medium">Sales Agent • Active</p>
                               </div>
                           </div>
 
                           {/* Waveform Viz */}
-                          <div className="flex-1 flex items-center justify-center gap-1.5 w-full my-4 md:my-6">
+                          <div className="flex-1 flex items-center justify-center gap-1.5 w-full my-4 md:my-6 min-h-[40px]">
                              {[...Array(7)].map((_, i) => (
                                 <motion.div
                                    key={i}
@@ -193,10 +194,10 @@ const Hero: React.FC = () => {
                           </div>
 
                           {/* Timer */}
-                          <div className="text-gray-400 font-mono text-sm mb-8 md:mb-12">02:14</div>
+                          <div className="text-gray-400 font-mono text-sm mb-8 md:mb-12 shrink-0">02:14</div>
 
                           {/* Action Buttons */}
-                          <div className="grid grid-cols-3 gap-x-4 md:gap-x-6 gap-y-4 md:gap-y-6 w-full max-w-[240px] md:max-w-[260px]">
+                          <div className="grid grid-cols-3 gap-x-4 md:gap-x-6 gap-y-4 md:gap-y-6 w-full max-w-[240px] md:max-w-[260px] shrink-0">
                               {[
                                   { icon: <Mic size={20} className="md:w-6 md:h-6" />, label: "Mute" },
                                   { icon: <div className="grid grid-cols-3 gap-1 w-4 h-4 md:w-5 md:h-5">{[...Array(9)].map((_,i) => <div key={i} className="bg-white rounded-full w-0.5 h-0.5 md:w-1 md:h-1"></div>)}</div>, label: "Keypad" },
@@ -212,7 +213,7 @@ const Hero: React.FC = () => {
                           </div>
                           
                           {/* End Call */}
-                          <div className="mt-6 md:mt-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-500 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:bg-red-600 transition-colors cursor-pointer active:scale-95">
+                          <div className="mt-6 md:mt-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-500 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:bg-red-600 transition-colors cursor-pointer active:scale-95 shrink-0">
                                <Phone size={24} className="text-white fill-white rotate-[135deg] md:w-7 md:h-7" />
                           </div>
 
