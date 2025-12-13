@@ -22,7 +22,8 @@ const Navbar: React.FC = () => {
         const section = document.querySelector(link.href);
         if (section) {
           const rect = section.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
+          // Adjust detection zone for better UX
+          if (rect.top <= 200 && rect.bottom >= 200) {
             current = link.href;
           }
         }
@@ -44,6 +45,23 @@ const Navbar: React.FC = () => {
     }
   }, [mobileMenuOpen]);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 100; // Fixed header height + buffer
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`fixed w-full z-40 transition-all duration-300 ${
@@ -51,7 +69,7 @@ const Navbar: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold tracking-wide text-white z-50 relative">
+        <a href="#" className="text-2xl font-bold tracking-wide text-white z-50 relative" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           METARIX
         </a>
 
@@ -61,6 +79,7 @@ const Navbar: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleSmoothScroll(e, link.href)}
               className={`text-sm transition-colors ${
                 activeSection === link.href
                   ? 'text-brand-coral font-bold shadow-glow-sm'
@@ -70,9 +89,13 @@ const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <button className="bg-brand-coral text-white px-6 py-2 rounded-full font-medium hover:bg-brand-coralHover hover:shadow-glow transition-all">
+          <a
+            href="#consulting"
+            onClick={(e) => handleSmoothScroll(e, '#consulting')}
+            className="bg-brand-coral text-white px-6 py-2 rounded-full font-medium hover:bg-brand-coralHover hover:shadow-glow transition-all cursor-pointer"
+          >
             Book a Demo
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -107,7 +130,7 @@ const Navbar: React.FC = () => {
                       ? 'text-brand-coral'
                       : 'text-white/80'
                   }`}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
                 >
                   {link.name}
                 </motion.a>
@@ -118,12 +141,13 @@ const Navbar: React.FC = () => {
                 transition={{ delay: 0.3 }}
                 className="pt-8"
               >
-                <button 
-                  className="w-full bg-brand-coral text-white py-4 rounded-xl text-lg font-bold shadow-glow"
-                  onClick={() => setMobileMenuOpen(false)}
+                <a
+                  href="#consulting"
+                  onClick={(e) => handleSmoothScroll(e, '#consulting')}
+                  className="block w-full text-center bg-brand-coral text-white py-4 rounded-xl text-lg font-bold shadow-glow"
                 >
                   Book a Demo
-                </button>
+                </a>
                 <p className="text-center text-gray-500 mt-6 text-sm">
                   Smart AI Solutions for the Future.
                 </p>

@@ -3,6 +3,22 @@ import { Play, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 100; // Fixed header height + buffer
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-28 pb-12 md:pt-20 md:pb-0 overflow-hidden">
       {/* Background Gradients */}
@@ -33,16 +49,24 @@ const Hero: React.FC = () => {
             Deploy human-like AI Voice Agents to handle your calls 24/7, and let our expert consultants engineer your complete AI business transformation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-            <button className="group flex items-center justify-center gap-2 bg-brand-coral text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-coralHover hover:shadow-glow transition-all w-full sm:w-auto active:scale-95">
+            <a 
+              href="#voice"
+              onClick={(e) => handleSmoothScroll(e, '#voice')}
+              className="group flex items-center justify-center gap-2 bg-brand-coral text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-coralHover hover:shadow-glow transition-all w-full sm:w-auto active:scale-95"
+            >
               <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 <Play size={14} fill="currentColor" />
               </span>
               Hear Our AI Agents
-            </button>
-            <button className="flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-gray-600 text-white font-medium hover:border-brand-coral hover:text-brand-coral transition-colors w-full sm:w-auto active:scale-95">
+            </a>
+            <a 
+              href="#consulting"
+              onClick={(e) => handleSmoothScroll(e, '#consulting')}
+              className="flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-gray-600 text-white font-medium hover:border-brand-coral hover:text-brand-coral transition-colors w-full sm:w-auto active:scale-95"
+            >
               Get a Consultation
               <ArrowRight size={18} />
-            </button>
+            </a>
           </div>
         </motion.div>
 
