@@ -11,25 +11,27 @@ const Comparison: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full md:w-3/4 mx-auto border-collapse">
+          <table className="w-full min-w-[800px] md:w-5/6 mx-auto border-collapse">
             <thead>
               <tr className="border-b border-white/10">
-                <th className="py-6 text-left text-gray-500 font-medium w-1/3">Feature</th>
-                <th className="py-6 text-center text-gray-500 font-medium w-1/3">Traditional Call Center</th>
-                <th className="py-6 text-center text-brand-coral font-bold text-xl w-1/3 bg-white/5 rounded-t-xl">Metarix Alive</th>
+                <th className="py-6 text-left text-gray-500 font-medium w-1/4 pl-4">Feature</th>
+                <th className="py-6 text-center text-gray-500 font-medium w-1/4">Traditional Call Center</th>
+                <th className="py-6 text-center text-gray-500 font-medium w-1/4">Other AI Agents</th>
+                <th className="py-6 text-center text-brand-coral font-bold text-xl w-1/4 bg-white/5 rounded-t-xl border-t border-x border-white/5">Metarix Alive</th>
               </tr>
             </thead>
             <tbody className="text-gray-300">
               {[
-                { label: "Availability", trad: "9-5 or Shift based", meta: "24/7/365 Always On" },
-                { label: "Scalability", trad: "Slow (Hiring/Training)", meta: "Instant (Infinite Scale)" },
-                { label: "Cost Per Minute", trad: "₹10", meta: "₹5.9" },
-                { label: "Wait Times", trad: "High during peaks", meta: "Zero. Instant pickup." },
-                { label: "Consistency", trad: "Variable", meta: "100% On-Script" }
+                { label: "Availability", trad: "9-5 or Shift based", other: "24/7 Always On", meta: "24/7 Always On" },
+                { label: "Response Latency", trad: "Instant", other: "High (~1000ms)", meta: "Ultra-low (~300ms)" },
+                { label: "Cost Per Minute", trad: "₹10.00", other: "₹8.00+", meta: "₹5.90" },
+                { label: "Scalability", trad: "Slow (Hiring)", other: "Instant", meta: "Instant" },
+                { label: "Conversation Quality", trad: "Inconsistent", other: "Robotic / Stiff", meta: "Human-like & Fluid" }
               ].map((row, idx) => (
                 <tr key={idx} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
                   <td className="py-4 px-4 font-medium">{row.label}</td>
                   <td className="py-4 px-4 text-center text-gray-500">{row.trad}</td>
+                  <td className="py-4 px-4 text-center text-gray-500">{row.other}</td>
                   <td className="py-4 px-4 text-center font-semibold text-white bg-white/5 border-x border-white/5">
                     {row.meta}
                   </td>
@@ -38,8 +40,9 @@ const Comparison: React.FC = () => {
               <tr>
                 <td className="py-6"></td>
                 <td className="py-6"></td>
+                <td className="py-6"></td>
                 <td className="py-6 text-center bg-white/5 rounded-b-xl border-x border-b border-white/5">
-                    <span className="text-brand-coral font-bold">40% Cost Reduction</span>
+                    <span className="text-brand-coral font-bold">Best Value & Performance</span>
                 </td>
               </tr>
             </tbody>
