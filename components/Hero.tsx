@@ -101,8 +101,9 @@ const Hero: React.FC = () => {
               Hear AI Samples
             </a>
             <a 
-              href="#consulting"
-              onClick={(e) => handleSmoothScroll(e, '#consulting')}
+              href="https://wa.me/919629165061?text=Hi%20Metarix%2C%20I%20want%20to%20build%20my%20AI%20strategy."
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-brand-coral/50 transition-all backdrop-blur-sm active:scale-95 w-full sm:w-auto"
             >
               Build Your AI Strategy

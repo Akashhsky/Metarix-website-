@@ -103,8 +103,9 @@ const Navbar: React.FC = () => {
             </a>
           ))}
           <a
-            href="#consulting"
-            onClick={(e) => handleSmoothScroll(e, '#consulting')}
+            href="https://wa.me/919629165061?text=Hi%20Metarix%2C%20I%27d%20like%20to%20book%20a%20demo%20for%20AI%20Voice%20Agents."
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-brand-coral text-white px-6 py-2 rounded-full font-medium hover:bg-brand-coralHover hover:shadow-glow transition-all cursor-pointer"
           >
             Book a Demo
@@ -159,8 +160,9 @@ const Navbar: React.FC = () => {
                 className="pt-8 w-full flex flex-col items-center"
               >
                 <a
-                  href="#consulting"
-                  onClick={(e) => handleSmoothScroll(e, '#consulting')}
+                  href="https://wa.me/919629165061?text=Hi%20Metarix%2C%20I%27d%20like%20to%20book%20a%20demo%20for%20AI%20Voice%20Agents."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="block w-full text-center bg-brand-coral text-white py-4 rounded-xl text-lg font-bold shadow-glow active:scale-95 transition-transform"
                 >
                   Book a Demo

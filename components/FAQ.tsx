@@ -122,8 +122,9 @@ const FAQ: React.FC = () => {
                     Everything you need to know about implementing Metarix Alive in your business.
                 </p>
                 <a 
-                    href="#consulting" 
-                    onClick={(e) => handleSmoothScroll(e, '#consulting')}
+                    href="https://wa.me/919629165061?text=Hi%20Metarix%2C%20I%20have%20some%20questions%20about%20your%20services."
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-white font-medium border-b border-brand-coral pb-1 hover:text-brand-coral hover:gap-3 transition-all"
                 >
                     Have more questions? Contact us
