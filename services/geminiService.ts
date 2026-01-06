@@ -1,7 +1,5 @@
-
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
-// System instruction to guide the bot's persona
 const SYSTEM_INSTRUCTION = `You are "Metarix Bot", a helpful and professional AI assistant for the agency METARIX.
 METARIX specializes in two main areas:
 1. "Metarix Alive" (AI Voice Calling Agents) (60% focus): Inbound/Outbound calls, Customer Support, Sales, lead qualification. Key benefits: 24/7 availability, zero wait times, multilingual support, ultra-low latency (300ms), and extremely affordable pricing (₹5.75 per minute).
@@ -15,11 +13,10 @@ If asked about pricing, state clearly that our rate is ₹5.75 per minute with a
 
 let chatSession: Chat | null = null;
 
-// Initialize the chat session if it doesn't exist to maintain conversation history
 export const getChatSession = (): Chat => {
   if (!chatSession) {
-    // CRITICAL: Initialize with named parameter and direct process.env.API_KEY usage
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const apiKey = process.env.API_KEY || '';
+    const ai = new GoogleGenAI({ apiKey });
     chatSession = ai.chats.create({
       model: 'gemini-3-pro-preview',
       config: {
@@ -30,13 +27,10 @@ export const getChatSession = (): Chat => {
   return chatSession;
 };
 
-// Sends a message to Gemini and returns the response text
 export const sendMessageToGemini = async (message: string): Promise<string> => {
   try {
     const chat = getChatSession();
-    // sendMessage accepts the message object
     const result: GenerateContentResponse = await chat.sendMessage({ message });
-    // Use the .text property directly (not a method call)
     return result.text || "I apologize, I didn't catch that. Could you please rephrase?";
   } catch (error) {
     console.error("Gemini API Error:", error);

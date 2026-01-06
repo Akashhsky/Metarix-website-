@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
+import { MessageCircle, X, Send, Bot } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { sendMessageToGemini } from '../services/geminiService';
 import { Message } from '../types';
@@ -45,7 +45,6 @@ const ChatBot: React.FC = () => {
 
   return (
     <>
-      {/* Floating Action Button */}
       <motion.button
         className="fixed bottom-6 right-6 z-50 p-4 bg-brand-coral text-white rounded-full shadow-glow hover:bg-brand-coralHover transition-colors"
         whileHover={{ scale: 1.1 }}
@@ -55,7 +54,6 @@ const ChatBot: React.FC = () => {
         {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
       </motion.button>
 
-      {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -64,7 +62,6 @@ const ChatBot: React.FC = () => {
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             className="fixed bottom-24 right-6 z-50 w-[90vw] md:w-[400px] h-[500px] bg-brand-card/95 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
-            {/* Header */}
             <div className="p-4 bg-brand-dark/50 border-b border-white/10 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-brand-coral/20 flex items-center justify-center text-brand-coral">
                 <Bot size={18} />
@@ -78,7 +75,6 @@ const ChatBot: React.FC = () => {
               </div>
             </div>
 
-            {/* Messages Area */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide">
               {messages.map((msg, idx) => (
                 <div
@@ -108,7 +104,6 @@ const ChatBot: React.FC = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Area */}
             <div className="p-4 bg-brand-dark/50 border-t border-white/10">
               <div className="relative">
                 <input

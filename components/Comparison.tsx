@@ -1,5 +1,4 @@
 import React from 'react';
-import { Check, X } from 'lucide-react';
 
 const Comparison: React.FC = () => {
   const comparisonData = [

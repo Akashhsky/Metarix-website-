@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Building2, ShoppingBag, ShieldCheck, Phone, Clock, UserCheck, Calendar, DollarSign, Package, AlertCircle, TrendingUp, ChevronRight, Mic } from 'lucide-react';
+import { Activity, Building2, ShoppingBag, ShieldCheck, Phone, Clock, UserCheck, Calendar, DollarSign, Package, AlertCircle, TrendingUp, ChevronRight } from 'lucide-react';
 
 const Industries: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -92,7 +92,6 @@ const Industries: React.FC = () => {
         </div>
 
         {/* Layout: Desktop (Split) / Mobile (Grid Tabs + Content) */}
-        {/* Reduced Height: lg:h-[380px] */}
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 lg:h-[380px]"
              onMouseEnter={() => setIsAutoPlaying(false)}
              onMouseLeave={() => setIsAutoPlaying(true)}
