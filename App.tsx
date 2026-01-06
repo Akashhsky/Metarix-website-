@@ -8,7 +8,6 @@ import Consulting from './components/Consulting';
 import Comparison from './components/Comparison';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
-import ChatBot from './components/ChatBot';
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
       <Comparison />
       <FAQ />
       <Footer />
-      <ChatBot />
     </div>
   );
 }
