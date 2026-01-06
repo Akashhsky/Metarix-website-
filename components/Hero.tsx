@@ -24,11 +24,18 @@ const Hero: React.FC = () => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+  // Spring physics for smooth movement
+  const springConfig = { stiffness: 150, damping: 25, mass: 0.5 };
+  const mouseXSpring = useSpring(x, springConfig);
+  const mouseYSpring = useSpring(y, springConfig);
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+  // Rotation transforms
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+  
+  // Glare effect transforms - moves opposite to rotation for realistic light reflection
+  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const glareOpacity = useTransform(mouseXSpring, [-0.5, 0, 0.5], [0.3, 0, 0.3]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -42,6 +49,20 @@ const Hero: React.FC = () => {
       x.set(xPct);
       y.set(yPct);
     }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+     const rect = ref.current?.getBoundingClientRect();
+     if (rect && e.touches.length > 0) {
+       const width = rect.width;
+       const height = rect.height;
+       const mouseX = e.touches[0].clientX - rect.left;
+       const mouseY = e.touches[0].clientY - rect.top;
+       const xPct = mouseX / width - 0.5;
+       const yPct = mouseY / height - 0.5;
+       x.set(xPct);
+       y.set(yPct);
+     }
   };
 
   const handleMouseLeave = () => {
@@ -101,7 +122,7 @@ const Hero: React.FC = () => {
               Hear AI Samples
             </a>
             <a 
-              href="https://wa.me/919629165061?text=Hi%20Metarix%2C%20I%20want%20to%20build%20my%20AI%20strategy."
+              href="https://wa.me/9363735061?text=Hi%20Metarix%2C%20I%20want%20to%20build%20my%20AI%20strategy."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-brand-coral/50 transition-all backdrop-blur-sm active:scale-95 w-full sm:w-auto"
@@ -134,22 +155,39 @@ const Hero: React.FC = () => {
               ref={ref}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleMouseLeave}
               style={{
                 rotateX,
                 rotateY,
                 transformStyle: "preserve-3d",
               }}
               // Responsive width/height for iPhone
-              className="relative w-[270px] xs:w-[300px] md:w-[320px] h-[550px] xs:h-[600px] md:h-[660px]"
+              className="relative w-[270px] xs:w-[300px] md:w-[320px] h-[550px] xs:h-[600px] md:h-[660px] will-change-transform cursor-grab active:cursor-grabbing"
            >
               {/* iPhone Frame */}
-              <div className="absolute inset-0 bg-[#2d2d2d] rounded-[45px] md:rounded-[55px] shadow-[0_0_0_8px_#1f1f1f,0_20px_50px_-10px_rgba(0,0,0,0.5)] border-[6px] md:border-[8px] border-[#3f3f3f] overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-[#2d2d2d] rounded-[45px] md:rounded-[55px] shadow-[0_0_0_8px_#1f1f1f,0_20px_50px_-10px_rgba(0,0,0,0.5)] border-[6px] md:border-[8px] border-[#3f3f3f] overflow-hidden"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                  {/* Dynamic Glare Effect */}
+                  <motion.div 
+                     className="absolute inset-0 w-[200%] h-full z-50 pointer-events-none opacity-0 md:opacity-100"
+                     style={{
+                        background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.05) 50%, transparent 54%)',
+                        x: glareX,
+                        opacity: glareOpacity
+                     }}
+                  />
                   
                   {/* Screen */}
-                  <div className="w-full h-full bg-[#000000] rounded-[38px] md:rounded-[45px] relative overflow-hidden flex flex-col">
+                  <div 
+                    className="w-full h-full bg-[#000000] rounded-[38px] md:rounded-[45px] relative overflow-hidden flex flex-col"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
                       
                       {/* Dynamic Island / Status Bar */}
-                      <div className="pt-4 px-6 md:px-8 flex justify-between items-center text-white/90 text-xs font-semibold z-20 shrink-0">
+                      <div className="pt-4 px-6 md:px-8 flex justify-between items-center text-white/90 text-xs font-semibold z-20 shrink-0 transform-gpu" style={{ transform: "translateZ(10px)" }}>
                           <span>9:41</span>
                           <div className="w-20 md:w-24 h-6 md:h-7 bg-black rounded-full absolute left-1/2 -translate-x-1/2 top-3 z-30 flex items-center justify-end px-2">
                             <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse mr-1"></div>
@@ -162,74 +200,85 @@ const Hero: React.FC = () => {
                       </div>
 
                       {/* Main Call UI */}
-                      {/* Increased top padding (pt-12 -> pt-16 md:pt-20) to clear the Dynamic Island */}
-                      <div className="flex-1 flex flex-col items-center pt-16 md:pt-20 pb-8 px-6 relative">
+                      <div className="flex-1 flex flex-col items-center pt-16 md:pt-20 pb-8 px-6 relative" style={{ transformStyle: "preserve-3d" }}>
                           
-                          {/* Background Glow */}
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 bg-brand-coral/20 blur-[60px] md:blur-[80px] rounded-full"></div>
+                          {/* Background Glow - Deep Layer */}
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-48 md:h-64 bg-brand-coral/20 blur-[60px] md:blur-[80px] rounded-full -z-10"></div>
 
-                          {/* Contact Info */}
-                          <div className="flex flex-col items-center gap-3 z-10 shrink-0">
-                              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center shadow-lg relative">
+                          {/* Contact Info - Popping Out (Z-depth) */}
+                          <motion.div 
+                             className="flex flex-col items-center gap-3 z-10 shrink-0"
+                             style={{ transform: "translateZ(40px)" }}
+                          >
+                              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center shadow-2xl relative">
                                   <User size={32} className="text-gray-400 md:w-[40px] md:h-[40px]" />
                                   <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 bg-brand-coral rounded-full flex items-center justify-center border-4 border-black">
                                       <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full animate-ping"></div>
                                   </div>
                               </div>
                               <div className="text-center mt-2">
-                                  <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">Metarix Alive</h3>
+                                  <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight drop-shadow-lg">Metarix Alive</h3>
                                   <p className="text-brand-coral text-xs md:text-sm font-medium">Sales Agent • Active</p>
                               </div>
-                          </div>
+                          </motion.div>
 
-                          {/* Waveform Viz */}
-                          <div className="flex-1 flex items-center justify-center gap-1.5 w-full my-4 md:my-6 min-h-[40px]">
+                          {/* Waveform Viz - Mid Depth */}
+                          <motion.div 
+                            className="flex-1 flex items-center justify-center gap-1.5 w-full my-4 md:my-6 min-h-[40px]"
+                            style={{ transform: "translateZ(30px)" }}
+                          >
                              {[...Array(7)].map((_, i) => (
                                 <motion.div
                                    key={i}
-                                   className="w-1.5 md:w-2 bg-gradient-to-t from-brand-coral to-white rounded-full"
+                                   className="w-1.5 md:w-2 bg-gradient-to-t from-brand-coral to-white rounded-full shadow-[0_0_10px_rgba(255,127,80,0.5)]"
                                    animate={{ height: [15, Math.random() * 60 + 20, 15] }}
                                    transition={{ repeat: Infinity, duration: 0.8 + Math.random() * 0.5, ease: "easeInOut" }}
                                 />
                              ))}
-                          </div>
+                          </motion.div>
 
                           {/* Timer */}
-                          <div className="text-gray-400 font-mono text-sm mb-8 md:mb-12 shrink-0">02:14</div>
+                          <div className="text-gray-400 font-mono text-sm mb-8 md:mb-12 shrink-0" style={{ transform: "translateZ(20px)" }}>02:14</div>
 
-                          {/* Action Buttons */}
-                          <div className="grid grid-cols-3 gap-x-4 md:gap-x-6 gap-y-4 md:gap-y-6 w-full max-w-[240px] md:max-w-[260px] shrink-0">
+                          {/* Action Buttons - Slight Depth */}
+                          <motion.div 
+                             className="grid grid-cols-3 gap-x-4 md:gap-x-6 gap-y-4 md:gap-y-6 w-full max-w-[240px] md:max-w-[260px] shrink-0"
+                             style={{ transform: "translateZ(20px)" }}
+                          >
                               {[
                                   { icon: <Mic size={20} className="md:w-6 md:h-6" />, label: "Mute" },
                                   { icon: <div className="grid grid-cols-3 gap-1 w-4 h-4 md:w-5 md:h-5">{[...Array(9)].map((_,i) => <div key={i} className="bg-white rounded-full w-0.5 h-0.5 md:w-1 md:h-1"></div>)}</div>, label: "Keypad" },
                                   { icon: <Phone size={20} className="md:w-6 md:h-6" />, label: "Speaker", active: true },
                               ].map((btn, i) => (
-                                  <div key={i} className="flex flex-col items-center gap-2">
-                                      <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-colors ${btn.active ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}>
+                                  <div key={i} className="flex flex-col items-center gap-2 group cursor-pointer">
+                                      <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center backdrop-blur-md transition-all shadow-lg group-hover:scale-110 ${btn.active ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}>
                                           {btn.icon}
                                       </div>
                                       <span className="text-[10px] text-white/50">{btn.label}</span>
                                   </div>
                               ))}
-                          </div>
+                          </motion.div>
                           
                           {/* End Call */}
-                          <div className="mt-6 md:mt-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-500 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:bg-red-600 transition-colors cursor-pointer active:scale-95 shrink-0">
+                          <motion.div 
+                             className="mt-6 md:mt-8 w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-500 flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:bg-red-600 transition-all cursor-pointer hover:scale-110 shrink-0"
+                             style={{ transform: "translateZ(20px)" }}
+                          >
                                <Phone size={24} className="text-white fill-white rotate-[135deg] md:w-7 md:h-7" />
-                          </div>
+                          </motion.div>
 
                       </div>
                   </div>
               </div>
 
-              {/* 3D Floating Elements (Parallax) - Optimized positions for mobile */}
+              {/* 3D Floating Elements (Parallax Cards Outside Phone) */}
               <motion.div 
-                 style={{ translateZ: 40 }}
+                 style={{ translateZ: 80 }}
                  className="absolute top-20 -left-6 md:top-1/4 md:-left-12 bg-[#1A1A1A]/90 backdrop-blur-xl border border-white/10 p-2 md:p-3 rounded-2xl shadow-2xl flex items-center gap-3 w-40 md:w-48 pointer-events-none scale-90 md:scale-100"
-                 animate={{ y: [0, -10, 0] }}
+                 animate={{ y: [0, -15, 0] }}
                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
               >
-                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 shrink-0">
+                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 shrink-0 shadow-[0_0_15px_rgba(74,222,128,0.3)]">
                     <Database size={14} className="md:w-[18px] md:h-[18px]" />
                  </div>
                  <div>
@@ -239,12 +288,12 @@ const Hero: React.FC = () => {
               </motion.div>
 
               <motion.div 
-                 style={{ translateZ: 60 }}
+                 style={{ translateZ: 100 }}
                  className="absolute bottom-32 -right-6 md:bottom-1/3 md:-right-16 bg-[#1A1A1A]/90 backdrop-blur-xl border border-white/10 p-2 md:p-3 rounded-2xl shadow-2xl flex items-center gap-3 w-44 md:w-52 pointer-events-none scale-90 md:scale-100"
-                 animate={{ y: [0, 15, 0] }}
+                 animate={{ y: [0, 20, 0] }}
                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
               >
-                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                     <Calendar size={14} className="md:w-[18px] md:h-[18px]" />
                  </div>
                  <div>

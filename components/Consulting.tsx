@@ -44,7 +44,7 @@ const Consulting: React.FC = () => {
             </ul>
 
             <a 
-              href="https://wa.me/919629165061?text=Hi%20Metarix%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20call."
+              href="https://wa.me/9363735061?text=Hi%20Metarix%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20call."
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-dark rounded-full font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,127,80,0.4)]"

@@ -1,8 +1,6 @@
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // System instruction to guide the bot's persona
 const SYSTEM_INSTRUCTION = `You are "Metarix Bot", a helpful and professional AI assistant for the agency METARIX.
