@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Partners from './components/Partners';
 import VoiceFeature from './components/VoiceFeature';
 import Industries from './components/Industries';
 import Consulting from './components/Consulting';
@@ -27,7 +26,6 @@ function App() {
         return (
           <>
             <Hero />
-            <Partners />
             <VoiceFeature />
             <Industries />
             <Consulting />
