@@ -1,44 +1,88 @@
 import React from 'react';
-import { Linkedin } from 'lucide-react';
-
-const XIcon = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-    className={className}
-    fill="currentColor"
-    width="20"
-    height="20"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
+import { Linkedin, Mail, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#111111] py-12 border-t border-white/5">
+    <footer className="bg-[#0A0A0A] pt-20 pb-10 border-t border-white/5">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <h3 className="text-2xl font-bold text-white mb-2">METARIX</h3>
-            <p className="text-gray-500 text-sm">Smart AI Solutions for the Future of Business.</p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
           
-          <div className="flex gap-6 justify-center md:justify-start">
-             <a href="#" className="text-gray-500 hover:text-brand-coral transition-colors" aria-label="LinkedIn">
-                <Linkedin size={20} />
-             </a>
-             <a href="#" className="text-gray-500 hover:text-brand-coral transition-colors" aria-label="X (formerly Twitter)">
-                <XIcon />
-             </a>
-          </div>
-        </div>
-        <div className="mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-4 md:gap-0">
-            <p className="text-center md:text-left">&copy; 2025 Metarix AI Agency. All rights reserved.</p>
-            <div className="flex gap-4 justify-center md:justify-end">
-                <a href="#" className="hover:text-gray-400">Privacy Policy</a>
-                <a href="#" className="hover:text-gray-400">Terms of Service</a>
+          {/* Column 1: Our Office */}
+          <div>
+            <h3 className="text-brand-coral font-bold text-sm uppercase tracking-[0.2em] mb-8">Our Office</h3>
+            <div className="flex gap-4">
+              <MapPin className="text-brand-coral shrink-0" size={20} />
+              <p className="text-gray-400 text-sm leading-relaxed max-w-[240px]">
+                626-1, Saravanampatti–Thudiyalur Road,<br />
+                Chinnavedampatti Post,<br />
+                Near Ramanis Mayuri, Coimbatore,<br />
+                Tamil Nadu, 641049.
+              </p>
             </div>
+          </div>
+
+          {/* Column 2: Contact Us */}
+          <div>
+            <h3 className="text-brand-coral font-bold text-sm uppercase tracking-[0.2em] mb-8">Contact Us</h3>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4 group">
+                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-coral group-hover:bg-brand-coral group-hover:text-white transition-colors shrink-0">
+                  <Mail size={18} />
+                </div>
+                <div className="flex flex-col">
+                  <a href="mailto:akash@metarix.in" className="text-white hover:text-brand-coral transition-colors mb-1">akash@metarix.in</a>
+                  <a href="mailto:selva@metarix.in" className="text-white hover:text-brand-coral transition-colors">selva@metarix.in</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 3: Quick Links */}
+          <div>
+            <h3 className="text-brand-coral font-bold text-sm uppercase tracking-[0.2em] mb-8">Quick Links</h3>
+            <ul className="space-y-4">
+              <li>
+                <a href="#" className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
+                  <span className="text-brand-coral opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span>
+                  Terms & Condition
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
+                  <span className="text-brand-coral opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span>
+                  Support
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
+                  <span className="text-brand-coral opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span>
+                  Refund Policy
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Social Icons row */}
+        <div className="flex gap-6 mb-10">
+          <a 
+            href="https://www.linkedin.com/company/111524897/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-gray-500 hover:text-brand-coral transition-colors"
+          >
+            <Linkedin size={20} />
+          </a>
+        </div>
+
+        {/* Divider */}
+        <div className="h-px w-full bg-white/5 mb-8"></div>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 font-medium">
+          <p>AER Hearing Essentials - Metarix</p>
+          <p>&copy; 2025 Metarix. All rights reserved.</p>
         </div>
       </div>
     </footer>
