@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onNavigateHome: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onNavigateHome }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -23,7 +27,6 @@ const Navbar: React.FC = () => {
         const section = document.querySelector(link.href);
         if (section) {
           const rect = section.getBoundingClientRect();
-          // Adjust detection zone for better UX
           if (rect.top <= 200 && rect.bottom >= 200) {
             current = link.href;
           }
@@ -37,7 +40,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -48,23 +50,30 @@ const Navbar: React.FC = () => {
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const headerOffset = 100; // Fixed header height + buffer
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+    onNavigateHome(); // Ensure we are on home page before scrolling
+    
+    // Use a small timeout to allow App.tsx to render home components before scrolling
+    setTimeout(() => {
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 10);
+    
     setMobileMenuOpen(false);
   };
 
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    onNavigateHome();
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setMobileMenuOpen(false);
   };
@@ -132,7 +141,6 @@ const Navbar: React.FC = () => {
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 bg-[#1A1A1A] flex flex-col justify-center items-center md:hidden h-[100dvh]"
           >
-            {/* Background Gradient Blob for visual interest */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-brand-coral/10 blur-[100px] rounded-full pointer-events-none"></div>
 
             <div className="flex flex-col items-center space-y-8 w-full max-w-sm px-6 relative z-10">

@@ -1,7 +1,37 @@
 import React from 'react';
 import { Linkedin, Mail, MapPin } from 'lucide-react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigateTerms: () => void;
+  onNavigateHome: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigateTerms, onNavigateHome }) => {
+  const handleTermsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onNavigateTerms();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleQuickLinkClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    onNavigateHome();
+    
+    // If it's an anchor on the home page, scroll to it
+    if (href.startsWith('#')) {
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-[#0A0A0A] pt-20 pb-10 border-t border-white/5">
       <div className="container mx-auto px-6">
@@ -42,13 +72,13 @@ const Footer: React.FC = () => {
             <h3 className="text-brand-coral font-bold text-sm uppercase tracking-[0.2em] mb-8">Quick Links</h3>
             <ul className="space-y-4">
               <li>
-                <a href="#" className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
+                <a href="#" onClick={handleTermsClick} className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
                   <span className="text-brand-coral opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span>
                   Terms & Condition
                 </a>
               </li>
               <li>
-                <a href="#faq" className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
+                <a href="#faq" onClick={(e) => handleQuickLinkClick(e, '#faq')} className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
                   <span className="text-brand-coral opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span>
                   Support
                 </a>
