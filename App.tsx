@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Highlights from './components/Highlights';
 import VoiceFeature from './components/VoiceFeature';
 import Industries from './components/Industries';
 import Consulting from './components/Consulting';
@@ -26,6 +27,7 @@ function App() {
         return (
           <>
             <Hero />
+            <Highlights />
             <VoiceFeature />
             <Industries />
             <Consulting />

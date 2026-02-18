@@ -90,12 +90,17 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="space-y-6 md:space-y-8 text-center lg:text-left order-2 lg:order-1"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-coral/30 bg-brand-coral/5 backdrop-blur-sm">
-             <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-coral opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-coral"></span>
-             </span>
-             <span className="text-[10px] md:text-xs font-bold text-brand-coral uppercase tracking-wider">Metarix AI Engine v2.0</span>
+          <div className="flex flex-col items-center lg:items-start gap-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-coral/30 bg-brand-coral/5 backdrop-blur-sm">
+               <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-coral opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-coral"></span>
+               </span>
+               <span className="text-[10px] md:text-xs font-bold text-brand-coral uppercase tracking-wider">Metarix alive Ai engine V2.0</span>
+            </div>
+            <p className="text-[10px] font-mono text-brand-coral/60 uppercase tracking-[0.2em] font-medium">
+              Metarix Alive is our Ai voice Agent
+            </p>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight md:leading-[1.1] text-white tracking-tight">
