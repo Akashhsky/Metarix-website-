@@ -79,8 +79,7 @@ const Footer: React.FC<FooterProps> = ({
                   <Mail size={18} />
                 </div>
                 <div className="flex flex-col">
-                  <a href="mailto:akash@metarix.in" className="text-white hover:text-brand-coral transition-colors mb-1">akash@metarix.in</a>
-                  <a href="mailto:selva@metarix.in" className="text-white hover:text-brand-coral transition-colors">selva@metarix.in</a>
+                  <a href="mailto:connect@metarix.in" className="text-white hover:text-brand-coral transition-colors mb-1">connect@metarix.in</a>
                 </div>
               </div>
             </div>
