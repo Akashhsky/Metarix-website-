@@ -3,13 +3,32 @@ import { Linkedin, Mail, MapPin } from 'lucide-react';
 
 interface FooterProps {
   onNavigateTerms: () => void;
+  onNavigatePrivacy: () => void;
+  onNavigateRefund: () => void;
   onNavigateHome: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onNavigateTerms, onNavigateHome }) => {
+const Footer: React.FC<FooterProps> = ({ 
+  onNavigateTerms, 
+  onNavigatePrivacy, 
+  onNavigateRefund, 
+  onNavigateHome 
+}) => {
   const handleTermsClick = (e: React.MouseEvent) => {
     e.preventDefault();
     onNavigateTerms();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSupportClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onNavigatePrivacy();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleRefundClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onNavigateRefund();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -78,13 +97,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigateTerms, onNavigateHome }) => {
                 </a>
               </li>
               <li>
-                <a href="#faq" onClick={(e) => handleQuickLinkClick(e, '#faq')} className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
+                <a href="#" onClick={handleSupportClick} className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
                   <span className="text-brand-coral opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span>
                   Support
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
+                <a href="#" onClick={handleRefundClick} className="text-gray-400 hover:text-brand-coral transition-all flex items-center gap-2 group text-sm">
                   <span className="text-brand-coral opacity-0 group-hover:opacity-100 transition-opacity">&gt;</span>
                   Refund Policy
                 </a>

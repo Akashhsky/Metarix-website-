@@ -9,29 +9,47 @@ import Comparison from './components/Comparison';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Terms from './components/Terms';
+import Privacy from './components/Privacy';
+import Refund from './components/Refund';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'terms'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'terms' | 'privacy' | 'refund'>('home');
+
+  const renderContent = () => {
+    switch (currentPage) {
+      case 'terms':
+        return <Terms onBack={() => setCurrentPage('home')} />;
+      case 'privacy':
+        return <Privacy onBack={() => setCurrentPage('home')} />;
+      case 'refund':
+        return <Refund onBack={() => setCurrentPage('home')} />;
+      default:
+        return (
+          <>
+            <Hero />
+            <Partners />
+            <VoiceFeature />
+            <Industries />
+            <Consulting />
+            <Comparison />
+            <FAQ />
+          </>
+        );
+    }
+  };
 
   return (
     <div className="bg-brand-dark min-h-screen text-brand-light font-sans selection:bg-brand-coral selection:text-white">
       <Navbar onNavigateHome={() => setCurrentPage('home')} />
       
-      {currentPage === 'home' ? (
-        <>
-          <Hero />
-          <Partners />
-          <VoiceFeature />
-          <Industries />
-          <Consulting />
-          <Comparison />
-          <FAQ />
-        </>
-      ) : (
-        <Terms onBack={() => setCurrentPage('home')} />
-      )}
+      {renderContent()}
       
-      <Footer onNavigateTerms={() => setCurrentPage('terms')} onNavigateHome={() => setCurrentPage('home')} />
+      <Footer 
+        onNavigateTerms={() => setCurrentPage('terms')} 
+        onNavigatePrivacy={() => setCurrentPage('privacy')}
+        onNavigateRefund={() => setCurrentPage('refund')}
+        onNavigateHome={() => setCurrentPage('home')} 
+      />
     </div>
   );
 }
